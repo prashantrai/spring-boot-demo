@@ -196,6 +196,9 @@ public class PlayerController {
  * Refer below for Employee-Dept API for Add and Update - It's Good
  * https://asbnotebook.com/2019/09/10/jpa-one-to-many-example-spring-boot/
  * 
+ * Refer below for Library and Book example: 
+ * 
+ * https://hellokoding.com/jpa-one-to-many-relationship-mapping-example-with-spring-boot-maven-and-mysql/
  */
 
 /*
@@ -215,5 +218,8 @@ public class PlayerController {
  * 
  * Query Methods: 
  * 	https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-introduction-to-query-methods/
+ * 
+ * 
+ * https://reflectoring.io/spring-boot-data-jpa-test/
  * 
  */

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
@@ -38,13 +39,21 @@ public class PlayerControllerTest {
 	@Autowired
 	private MockMvc mockmvc;
 	
-	@MockBean 	// to provide mock implementations for any required dependencies.
+	
+	/* If a test that doesn't need any dependencies from the Spring Boot container, 
+	 * the classic/plain Mockito is the way to follow : it is fast and favors the isolation of the tested component. 
+	 * 
+	 * If your test needs to rely on the Spring Boot container and you want also to 
+	 * add or mock one of the container beans : @MockBean from Spring Boot is the way.
+	 */
+	
+	@MockBean 	// to provide mock implementations for required dependencies.
 	private SoccerService soccerService;
 	
 	
-	/*@Before
+	@BeforeEach // from Junit 5
     public void setUp() throws Exception {
-    }*/
+    }
 	
 	@Test
 	public void getAllPlayers() throws Exception {
