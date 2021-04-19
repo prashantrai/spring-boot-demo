@@ -22,7 +22,7 @@ import com.example.demo.model.Team;
 	performing an @EntityScan
 	turning on SQL logging
  * */
-@DataJpaTest  //Jnit 5, When using JUnit 4, this annotation should be used in combination with @RunWith(SpringRunner.class)  
+@DataJpaTest  //Jnit 5, When using JUnit 4, this annotation should be used in combination with @RunWith(SpringRunner.class)
 public class PlayerRepositoryTest {
 
 	@Autowired

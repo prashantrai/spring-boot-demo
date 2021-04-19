@@ -1,0 +1,267 @@
+
+######  Working APIs #######
+
+###### Add a player
+
+POST http://localhost:8080/players
+Req: 
+{
+	"name":"Pique3",
+	"num": 12,
+	"position": "Forward",
+	 "team": {
+	 	"id" : 2
+	 }
+}
+
+Resp:
+
+{
+    "id": 4,
+    "name": "Pique3",
+    "num": 12,
+    "position": "Forward",
+    "team": {
+        "id": 2,
+        "name": "Barcelona2"
+    }
+} 
+
+
+###### Update a player
+PUT http://localhost:8080/players
+
+Req: 
+{
+	"id": 1,
+	"name":"Pique5",
+	"num": 21,
+	"position": "Forward",
+	 "team": {
+	 	"id" : 1
+	 }
+}
+
+Resp: 
+{
+    "id": 1,
+    "name": "Pique5",
+    "num": 21,
+    "position": "Forward",
+    "team": {
+        "id": 1,
+        "name": "Barcelona"
+    }
+}
+
+
+###### Delete a player
+DELETE http://localhost:8080/players/5
+
+Resp: HTTP Status 200 OK
+
+
+###### Get all players
+GET http://localhost:8080/players/
+
+###### Get all players starts with a name 
+http://localhost:8080/players/names?name=Pique
+
+Resp: 
+[
+    {
+        "id": 1,
+        "name": "Pique5",
+        "num": 21,
+        "position": "Forward",
+        "team": {
+            "id": 1,
+            "name": "Barcelona"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Pique4",
+        "num": 14,
+        "position": "Defender",
+        "team": {
+            "id": 1,
+            "name": "Barcelona"
+        }
+    }
+]
+
+
+####### Get all players of a team
+GET http://localhost:8080/players/teams/1
+
+Resp: 
+[
+    {
+        "id": 1,
+        "name": "Pique5",
+        "num": 21,
+        "position": "Forward",
+        "team": {
+            "id": 1,
+            "name": "Barcelona"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Pique4",
+        "num": 14,
+        "position": "Defender",
+        "team": {
+            "id": 1,
+            "name": "Barcelona"
+        }
+    }
+]
+
+
+###### Get/Search all players from a team by team name
+GET http://localhost:8080/players/teams?teamName=Barcelona2
+
+Resp: 
+[
+    {
+        "id": 3,
+        "name": "Pique4",
+        "num": 13,
+        "position": "Forward",
+        "team": {
+            "id": 2,
+            "name": "Barcelona2"
+        }
+    }
+]
+
+
+###### Get a team details
+GET http://localhost:8080/teams/1
+
+Resp: 
+{
+    "id": 1,
+    "name": "Barcelona"
+}
+
+
+###### Get all players [Pagination example]
+http://localhost:8080/players/pageable?page=0&size=3&sort=name
+
+Resp: 
+{
+    "content": [
+        {
+            "id": 3,
+            "name": "Pique4",
+            "num": 13,
+            "position": "Forward",
+            "team": {
+                "id": 2,
+                "name": "Barcelona2"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Pique4",
+            "num": 14,
+            "position": "Defender",
+            "team": {
+                "id": 1,
+                "name": "Barcelona"
+            }
+        },
+        {
+            "id": 1,
+            "name": "Pique5",
+            "num": 21,
+            "position": "Forward",
+            "team": {
+                "id": 1,
+                "name": "Barcelona"
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 3,
+    "first": true,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "size": 3,
+    "numberOfElements": 3,
+    "empty": false
+}
+
+
+###### Get all players of a team
+GET http://localhost:8080/teams/1/players
+
+Note: below response with HAL is beause of "spring-boot-starter-data-rest" dependency
+
+Resp:
+{
+    "_embedded": {
+        "players": [
+            {
+                "name": "Pique1",
+                "num": 11,
+                "position": "Defender",
+                "_links": {
+                    "self": {
+                        "href": "http://localhost:8080/players/1"
+                    },
+                    "player": {
+                        "href": "http://localhost:8080/players/1"
+                    },
+                    "team": {
+                        "href": "http://localhost:8080/players/1/team"
+                    }
+                }
+            },
+            {
+                "name": "Pique2",
+                "num": 12,
+                "position": "Defender",
+                "_links": {
+                    "self": {
+                        "href": "http://localhost:8080/players/2"
+                    },
+                    "player": {
+                        "href": "http://localhost:8080/players/2"
+                    },
+                    "team": {
+                        "href": "http://localhost:8080/players/2/team"
+                    }
+                }
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/teams/1/players"
+        }
+    }
+}
+
+
+
